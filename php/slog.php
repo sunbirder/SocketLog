@@ -23,6 +23,8 @@ class Slog
         'optimize' => false,
         'show_included_files' => false,
         'error_handler' => false,
+        // 是否显示所有, 默认为false
+        'is_show_all' => false,
         //日志强制记录到配置的client_id
         'force_client_ids' => array(),
         //限制允许读取日志的client_id
@@ -368,6 +370,11 @@ class Slog
     public static function sendLog()
     {
         if (!self::check()) {
+            return;
+        }
+
+        // 不显示所有, 数据不存在时不显示
+        if (false === self::$config['is_show_all'] && empty(self::$logs)) {
             return;
         }
 
