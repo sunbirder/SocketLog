@@ -251,7 +251,7 @@ class Slog
         }
         $tabid = self::getClientArg('tabid');
         //是否记录日志的检查
-        if ((!$tabid || self::getConfig('is_table_id')) && !self::getConfig('force_client_ids')) {
+        if ((self::getConfig('is_table_id') && !$tabid) && !self::getConfig('force_client_ids')) {
             return false;
         }
         //用户认证
