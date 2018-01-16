@@ -32,8 +32,9 @@ slog(array(
     'show_included_files' => false, //是否显示本次程序运行加载了哪些文件，默认为false
     'error_handler' => false, //是否接管程序错误，将程序错误显示在console中，默认为false
     'is_show_all' => false, // 是否显示所有, 默认为false
+    'is_table_id' => true, // 是否table_id作为非必须参数， 默认必须
     'force_client_ids' => array( //日志强制记录到配置的client_id,默认为空,client_id必须在allow_client_ids中
-        //'client_01',
+        'sunbirder',
         //'client_02',
     ),
     'allow_client_ids' => array( //限制允许读取日志的client_id，默认为空,表示所有人都可以获得日志。
@@ -42,3 +43,7 @@ slog(array(
         //'client_03',
     ),
 ), 'config');
+
+slog([111=>'wwww']);
+
+

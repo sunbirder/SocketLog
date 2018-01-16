@@ -29,6 +29,8 @@ class Slog
         'force_client_ids' => array(),
         //限制允许读取日志的client_id
         'allow_client_ids' => array(),
+        // 是否table_id作为必须参数， 默认必须
+        'is_table_id' => true,
     );
 
     protected static $logs = array();
@@ -249,7 +251,7 @@ class Slog
         }
         $tabid = self::getClientArg('tabid');
         //是否记录日志的检查
-        if (!$tabid && !self::getConfig('force_client_ids')) {
+        if ((!$tabid || self::getConfig('is_table_id')) && !self::getConfig('force_client_ids')) {
             return false;
         }
         //用户认证
@@ -257,7 +259,7 @@ class Slog
         if (!empty($allow_client_ids)) {
             //通过数组交集得出授权强制推送的client_id
             self::$_allowForceClientIds = array_intersect($allow_client_ids, self::getConfig('force_client_ids'));
-            if (!$tabid && count(self::$_allowForceClientIds)) {
+            if (count(self::$_allowForceClientIds)) {
                 return true;
             }
 
@@ -359,6 +361,8 @@ class Slog
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_PROXY, "127.0.0.1"); //代理服务器地址
+        curl_setopt($ch, CURLOPT_PROXYPORT, 8888); //代理服务器端口
         $headers = array(
             "Content-Type: application/json;charset=UTF-8",
         );
