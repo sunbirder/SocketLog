@@ -34,7 +34,7 @@ slog(array(
     'is_show_all' => false, // 是否显示所有, 默认为false
     'is_table_id' => true, // 是否table_id作为非必须参数， 默认必须
     'force_client_ids' => array( //日志强制记录到配置的client_id,默认为空,client_id必须在allow_client_ids中
-        // 'sunbirder',
+        'sunbirder',
         //'client_02',
     ),
     'allow_client_ids' => array( //限制允许读取日志的client_id，默认为空,表示所有人都可以获得日志。
